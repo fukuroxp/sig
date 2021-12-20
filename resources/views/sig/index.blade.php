@@ -18,8 +18,16 @@
     <link href="{{ asset('softlands/css/materialdesignicons.min.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('softlands/css/style.min.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
 </head>
-
+<style>
+    #map { height: 500px; }
+</style>
 <body>
     <!-- STRAT NAVBAR -->
     <div id="navbar">
@@ -41,6 +49,9 @@
                         </li>
                         <li class="nav-item">
                                 <a data-scroll href="#location" class="nav-link">Wisata Populer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a data-scroll href="#map" class="nav-link">Peta Surabaya</a>
                         </li>
                         <li class="nav-item">
                             <a data-scroll href="#add" class="nav-link">Tambah Lokasi</a>
@@ -247,6 +258,20 @@
     </section>
     <!-- END HOW IT WORK -->
 
+    <section class="section bg-contact pb-0 pt-5" id="map">
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="title-box text-center">
+                        <h5 class="sub-title text-primary f-13 text-uppercase">Peta</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="map"></div>
+    </section>
+
     <!-- START CONTACT -->
     <section class="section bg-contact pb-0 pt-5" id="add">
         <div class="container">
@@ -427,6 +452,18 @@
     <script src="{{ asset('softlands/js/unicons.js') }}"></script>
     <!-- Contact Form  -->
     <script src="{{ asset('softlands/js/app.js') }}"></script>
+<script>
+    var map = L.map('map').setView([-7.250445, 112.768845], 13);
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoiZnVrdXJveHAiLCJhIjoiY2t4ZTYyeXh6M216eTJvcG16N2VjZDdpYSJ9.tye0SD-jTt_c714GMe_LcQ'
+    }).addTo(map);
+</script>
 </body>
 
 
